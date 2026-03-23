@@ -33,7 +33,7 @@ export default function DashboardPage({
         width="100%"
         height="100%"
         style={{ border: "none", display: "block" }}
-        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+        allowFullScreen
         loading="lazy"
       />
     </div>
