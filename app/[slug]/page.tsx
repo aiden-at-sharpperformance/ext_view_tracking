@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePlausible } from "next-plausible";
+import { track } from "@vercel/analytics";
 import { getDashboard } from "@/config/dashboards";
 import { notFound } from "next/navigation";
 import { use } from "react";
@@ -13,13 +13,12 @@ export default function DashboardPage({
 }) {
   const { slug } = use(params);
   const dashboard = getDashboard(slug);
-  const plausible = usePlausible();
 
   useEffect(() => {
     if (dashboard) {
-      plausible("Dashboard View", { props: { dashboard: slug } });
+      track("Dashboard View", { dashboard: slug });
     }
-  }, [dashboard, slug, plausible]);
+  }, [dashboard, slug]);
 
   if (!dashboard) {
     notFound();

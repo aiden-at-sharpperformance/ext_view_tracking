@@ -1,6 +1,5 @@
 import { dashboards } from "@/config/dashboards";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { AdminLogin } from "./login";
 
 async function isAuthenticated() {
@@ -14,10 +13,6 @@ export default async function AdminPage() {
   if (!authed) {
     return <AdminLogin />;
   }
-
-  const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-  const plausibleHost =
-    process.env.NEXT_PUBLIC_PLAUSIBLE_CUSTOM_DOMAIN || "plausible.io";
 
   return (
     <div
@@ -33,18 +28,17 @@ export default async function AdminPage() {
         {dashboards.length} dashboard{dashboards.length !== 1 && "s"} configured
       </p>
 
-      {plausibleDomain && (
-        <p style={{ marginBottom: "2rem" }}>
-          <a
-            href={`https://${plausibleHost}/${plausibleDomain}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "#0070f3" }}
-          >
-            View analytics in Plausible &rarr;
-          </a>
-        </p>
-      )}
+      <p style={{ marginBottom: "2rem" }}>
+        View analytics in your{" "}
+        <a
+          href="https://vercel.com/analytics"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#0070f3" }}
+        >
+          Vercel Dashboard &rarr;
+        </a>
+      </p>
 
       <table
         style={{
